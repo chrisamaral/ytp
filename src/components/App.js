@@ -6,7 +6,7 @@ class App extends Component {
   constructor() {
 
     super();
-    this.state = {};
+    this.state = {tab: 'tab-editor'};
 
   }
 
@@ -81,11 +81,42 @@ class App extends Component {
       );
     }
 
+    const isActive = tab => this.state.tab === tab ? 'active' : '';
+    const changeTo = tab => ev => ev.preventDefault() + this.setState({tab});
+
     return (
       <div>
-        <Header />
-        {content}
-        <div id='yt-player'/>
+
+        <ul className='nav nav-tabs'>
+
+          <li className={isActive('tab-editor')}>
+
+            <a href='' onClick={changeTo('tab-editor')}>Editor</a>
+
+          </li>
+
+          <li className={isActive('tab-player')}>
+
+            <a href='' onClick={changeTo('tab-player')}>Player</a>
+
+          </li>
+
+        </ul>
+
+        <hr />
+
+        <div className="tab-content">
+
+          <div className={`tab-pane ${isActive('tab-editor')}`}>
+            {content}
+          </div>
+
+          <div className={`tab-pane ${isActive('tab-player')}`}>
+            <div id='yt-player'/>
+          </div>
+
+        </div>
+
       </div>
     );
   }

@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
 import qs from 'qs';
 
+function stopOnceLoaded(e) {
+
+  if (e.data !== YT.PlayerState.PLAYING) return;
+
+  ytp.player.pauseVideo();
+  ytp.removeListener('yt-state-change', stopOnceLoaded);
+
+}
+
 class Editor extends Component {
 
   render() {
@@ -12,7 +21,7 @@ class Editor extends Component {
             <label>
               url do novo vídeo
             </label>
-            <input name='videoUrl' type='url' required className='form-control' />
+            <input name='videoUrl' type='url' required className='form-control'/>
           </div>
         </form>
       </div>
@@ -39,8 +48,11 @@ class Editor extends Component {
 
     e.target.elements.videoUrl.value = '';
 
-    console.log(videoId);
+
+
+    ytp.on('yt-state-change', stopOnceLoaded);
     ytp.player.loadVideoById(videoId);
+
 
   }
 

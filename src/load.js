@@ -37,7 +37,7 @@ function yt() {
       width: window.innerWidth - 30,
       videoId: '2zPWckFtlAk',
       events: {
-        onReady: ytp.emit.bind(ytp, 'yt-ready'),
+        onReady: () => ytp.player.mute(),
         onStateChange: ytp.emit.bind(ytp, 'yt-state-change')
       }
     });

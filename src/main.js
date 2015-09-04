@@ -30,6 +30,26 @@ ytp.db.onAuth(authData => {
 ytp.on('logged-in', user => ytp.db
   .child(`user/${user.uid}`).set(user));
 
+ytp.on('yt-state-change', ev => {
+
+  if (ev.data !== YT.PlayerState.PLAYING) return;
+
+  const info = ytp.player.getVideoData();
+
+  if (!info) return;
+
+  const id = info.video_id;
+  const {title} = info;
+  const duration = ytp.player.getDuration();
+
+  ytp.db.child(`video/${id}`).set({
+    id,
+    title,
+    duration
+  });
+
+});
+
 load.fb();
 load.yt();
 
