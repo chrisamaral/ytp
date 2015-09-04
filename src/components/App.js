@@ -12,8 +12,11 @@ class App extends Component {
 
   componentDidMount() {
 
-    ytp.on('fb-ready', () =>
-      this.setState({fbReady: true}));
+    const update = this.forceUpdate.bind(this);
+
+    ytp.on('fb-ready', update);
+    ytp.on('logged-in', update);
+
 
   }
 
@@ -45,7 +48,7 @@ class App extends Component {
       );
     }
 
-    if (!this.state.fbReady) {
+    if (!ytp.fbReady) {
 
       content = (
         <div className='container'>

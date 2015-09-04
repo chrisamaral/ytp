@@ -24,6 +24,7 @@ global.fbAsyncInit = () => {
     version: 'v2.4'
   });
 
+  ytp.fbReady = true;
   ytp.emit('fb-ready');
 
 };
