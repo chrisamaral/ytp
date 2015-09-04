@@ -10,7 +10,7 @@ class Header extends Component {
         <div className='container-fluid'>
           <div className='navbar-header'>
             <a className='navbar-brand' href='/'>
-              Playlist Zoada
+              Editor de Playlists Zoadas
             </a>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import SelectPlaylist from './SelectPlaylist.js';
+import CreatePlaylist from './CreatePlaylist.js';
+import Playlist from './Playlist.js';
 
 class Content extends Component {
 
@@ -9,8 +10,8 @@ class Content extends Component {
       <section>
 
         {ytp.playlistId()
-          ? <p>Oi</p>
-          : <SelectPlaylist />
+          ? <Playlist />
+          : <CreatePlaylist />
         }
       </section>
     );
