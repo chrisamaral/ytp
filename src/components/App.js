@@ -12,10 +12,10 @@ class App extends Component {
 
   componentDidMount() {
 
-    const update = this.forceUpdate.bind(this);
+    const update = () => this.forceUpdate();
 
     ytp.on('fb-ready', update);
-    ytp.on('logged-in', update);
+    ytp.on('auth-change', update);
 
 
   }
