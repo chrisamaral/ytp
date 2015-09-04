@@ -2,6 +2,7 @@ import {EventEmitter} from 'events';
 import qs from 'qs';
 import React from 'react';
 import App from './components/App.js';
+import load from './load.js';
 
 const {Firebase} = global;
 const ytp = global.ytp = new EventEmitter();
@@ -29,30 +30,7 @@ ytp.db.onAuth(authData => {
 ytp.on('logged-in', user => ytp.db
   .child(`user/${user.uid}`).set(user));
 
-global.fbAsyncInit = () => {
-
-  FB.init({
-    appId: '119146078437268',
-    xfbml: true,
-    version: 'v2.4'
-  });
-
-  ytp.fbReady = true;
-  ytp.emit('fb-ready');
-
-};
-
-(function (d, s, id) {
-
-  var js, fjs = d.getElementsByTagName(s)[0];
-
-  if (d.getElementById(id)) return;
-
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js";
-  fjs.parentNode.insertBefore(js, fjs);
-
-}(document, 'script', 'facebook-jssdk'));
+load.fb();
+load.yt();
 
 React.render(<App />, document.getElementById('application'));

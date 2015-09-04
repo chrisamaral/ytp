@@ -85,6 +85,7 @@ class App extends Component {
       <div>
         <Header />
         {content}
+        <div id='yt-player'/>
       </div>
     );
   }

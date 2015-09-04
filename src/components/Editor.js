@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import qs from 'qs';
 
 class Editor extends Component {
 
@@ -11,7 +12,7 @@ class Editor extends Component {
             <label>
               url do novo vídeo
             </label>
-            <input name='videoUrl' type='url' className='form-control' />
+            <input name='videoUrl' type='url' required className='form-control' />
           </div>
         </form>
       </div>
@@ -22,7 +23,24 @@ class Editor extends Component {
   enqueue(e) {
 
     e.preventDefault();
-    console.log(e.target.elements.videoUrl);
+
+    const videoUrl = e.target.elements.videoUrl.value;
+
+    let videoId;
+
+    if (videoUrl.indexOf('?')) {
+
+      const query = qs.parse(videoUrl.substr(videoUrl.indexOf('?') + 1));
+      videoId = query && query.v;
+
+    }
+
+    if (!videoId) videoId = videoUrl.split('/').pop();
+
+    e.target.elements.videoUrl.value = '';
+
+    console.log(videoId);
+    ytp.player.loadVideoById(videoId);
 
   }
 
