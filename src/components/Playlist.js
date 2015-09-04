@@ -9,12 +9,14 @@ class Playlist extends FireComponent {
 
     const id = ytp.playlistId();
     this.sync(`playlist/${id}/name`);
+    this.sync(`playlist/${id}/ini`);
 
   }
 
-  onChangeName(ev) {
 
-    this.setState({name: ev.target.value});
+  onChange(name) {
+
+    return ev => this.setState({[name]: ev.target.value});
 
   }
 
@@ -24,11 +26,23 @@ class Playlist extends FireComponent {
       <div className='container-fluid'>
         <div className='row'>
 
-          <form className='col-sm-7'>
+          <form>
 
-            <div className='form-group'>
-              <input className='form-control' value={this.state.name}
-                     onChange={this.onChangeName.bind(this)}/>
+            <div className='form-group col-sm-4'>
+              <label>nome da parada</label>
+              <input className='form-control'
+                     value={this.state.name}
+                     onChange={this.onChange('name')}/>
+
+
+            </div>
+
+            <div className='form-group col-sm-3'>
+              <label>quando vai rolar</label>
+              <input className='form-control'
+                     type='datetime-local'
+                     value={this.state.ini}
+                     onChange={this.onChange('ini')}/>
 
             </div>
 
