@@ -3,13 +3,18 @@ import qs from 'qs';
 import React from 'react';
 import App from './components/App.js';
 
-const F = global.Firebase;
-const ytp = new EventEmitter();
+const {Firebase} = global;
+const ytp = global.ytp = new EventEmitter();
 
 ytp.db = new Firebase('https://ytp.firebaseio.com');
 ytp.playlistId = () => qs.parse(location.search.substr(1)).p;
 
-global.ytp = ytp;
+ytp.db.onAuth(authData => {
+
+  ytp.user = authData;
+  ytp.emit('logged-in');
+
+});
 
 global.fbAsyncInit = () => {
 
@@ -19,7 +24,7 @@ global.fbAsyncInit = () => {
     version: 'v2.4'
   });
 
-  ytp.emit('fb-loaded');
+  ytp.emit('fb-ready');
 
 };
 
@@ -36,6 +41,4 @@ global.fbAsyncInit = () => {
 
 }(document, 'script', 'facebook-jssdk'));
 
-
-
-React.render(<App />, document.getElementById('container'))
+React.render(<App />, document.getElementById('application'));

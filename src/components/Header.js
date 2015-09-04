@@ -9,7 +9,7 @@ class Header extends Component {
 
         <div className='container-fluid'>
           <div className='navbar-header'>
-            <a className='navbar-brand'>
+            <a className='navbar-brand' href='/'>
               Playlist Zoada
             </a>
           </div>
