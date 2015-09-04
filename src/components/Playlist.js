@@ -1,24 +1,8 @@
-import React from 'react';
-import FireComponent from './FireComponent.js';
+import React, {Component} from 'react';
+import Editor from './Editor.js';
+import Metadata from './Metadata.js';
 
-class Playlist extends FireComponent {
-
-  constructor() {
-
-    super();
-
-    const id = ytp.playlistId();
-    this.sync(`playlist/${id}/name`);
-    this.sync(`playlist/${id}/ini`);
-
-  }
-
-
-  onChange(name) {
-
-    return ev => this.setState({[name]: ev.target.value});
-
-  }
+class Playlist extends Component {
 
   render() {
 
@@ -26,29 +10,20 @@ class Playlist extends FireComponent {
       <div className='container-fluid'>
         <div className='row'>
 
-          <form>
+          <div className='col-sm-7'>
 
-            <div className='form-group col-sm-4'>
-              <label>nome da parada</label>
-              <input className='form-control'
-                     value={this.state.name}
-                     onChange={this.onChange('name')}/>
+            <Metadata />
+            <Editor />
 
+          </div>
 
-            </div>
+          <aside className='col-sm-5'>
+            lista final
+          </aside>
 
-            <div className='form-group col-sm-3'>
-              <label>quando vai rolar</label>
-              <input className='form-control'
-                     type='datetime-local'
-                     value={this.state.ini}
-                     onChange={this.onChange('ini')}/>
-
-            </div>
-
-          </form>
 
         </div>
+
       </div>
     );
 
