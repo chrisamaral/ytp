@@ -56,11 +56,11 @@ class Queue extends Component {
       <div className='text-center'>
 
         {videos.map(
-          ({videoId, userId}, index) => (
+          ({videoId, userId}) => (
             <VideoThumb
               key={videoId}
-              moveUp={index > 0 && this.moveUp(videoId)}
-              moveDown={index < videos.length - 1 && this.moveDown(videoId)}
+              moveUp={this.moveUp(videoId)}
+              moveDown={this.moveDown(videoId)}
               videoId={videoId}
               userId={userId}/>
           )
@@ -91,10 +91,17 @@ class Queue extends Component {
 
   }
 
-  swap(videoA, videoB) {
+  swap(videoA, videoB, offset = 0) {
 
     const a = this.db.child(videoA);
     const b = this.db.child(videoB);
+
+    if (offset !== 0) {
+
+      return b.once('value', snap => a
+        .setPriority(snap.getPriority() + offset));
+
+    }
 
     const replace = priority => b.once('value',
         snap => a.setPriority(snap.getPriority()) + b.setPriority(priority)
@@ -110,8 +117,9 @@ class Queue extends Component {
 
       const {videos} = this.state;
       const index = this.indexOf(videoId);
+      const previous = videos[index - 1] ? index + 1 : videos.length - 1;
 
-      this.swap(videos[index].videoId, videos[index - 1].videoId);
+      this.swap(videos[index].videoId, videos[previous].videoId, previous === videos.length - 1 ? 1 : 0);
 
     };
 
@@ -123,8 +131,9 @@ class Queue extends Component {
 
       const {videos} = this.state;
       const index = this.indexOf(videoId);
+      const next = videos[index + 1] ? index + 1 : 0;
 
-      this.swap(videos[index].videoId, videos[index + 1].videoId);
+      this.swap(videos[index].videoId, videos[next].videoId, next === 0 ? -1 : 0);
 
     };
 
