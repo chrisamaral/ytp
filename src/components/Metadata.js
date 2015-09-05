@@ -1,21 +1,47 @@
-import React from 'react';
-import FireComponent from './FireComponent.js';
+import React, {Component} from 'react';
+import debounce from 'debounce';
 
-class Metadata extends FireComponent {
+class Metadata extends Component {
 
   constructor() {
 
     super();
+    this.state = {};
+
+  }
+
+  componentDidMount() {
 
     const id = ytp.playlistId();
-    this.sync(`playlist/${id}/name`);
-    this.sync(`playlist/${id}/ini`);
+    this.db = {
+      name: ytp.db.child(`playlist/${id}/name`),
+      ini: ytp.db.child(`playlist/${id}/ini`)
+    };
+
+    this.updateName = snap => this.setState({name: snap.val()});
+    this.updateIni = snap => this.setState({ini: snap.val()});
+
+    this.db.name.set = debounce(this.db.name.set.bind(this.db.name), 300);
+    this.db.ini.set = debounce(this.db.ini.set.bind(this.db.ini), 300);
+
+    this.db.name.on('value', this.updateName);
+    this.db.ini.on('value', this.updateIni);
+
+  }
+
+  componentWillUnmount() {
+
+    this.db.name.off('value', this.updateName);
+    this.db.ini.off('value', this.updateIni);
 
   }
 
   onChange(name) {
 
-    return ev => this.setState({[name]: ev.target.value});
+    return ev => this.setState(
+      {[name]: ev.target.value},
+      this.db[name].set(ev.target.value)
+    );
 
   }
 
