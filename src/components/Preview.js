@@ -5,6 +5,7 @@ import assign from 'object-assign';
 import find from 'array-find';
 import obj from 'object-path';
 import Item from './Item.js';
+import noAccent from '../no-accents.js';
 
 const MAX = 10 * 60;
 const MARGIN = 11 * 60;
@@ -79,7 +80,7 @@ class Preview extends Component {
         const user = find(lists, u => u.uid === me.uid) ||
           assign({
             videos: [],
-            sortToken: obj.get(me, 'facebook.cachedUserProfile.name', '')
+            sortToken: noAccent(obj.get(me, 'facebook.cachedUserProfile.name', ''))
               .replace(/\s/, '')
               .toLowerCase()
           }, me);
