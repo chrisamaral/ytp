@@ -78,7 +78,6 @@ class Editor extends Component {
           </div>
         )}
 
-
         <Queue />
       </div>
     );

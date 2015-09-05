@@ -98,7 +98,7 @@ class Preview extends Component {
       let duration;
       let user;
       let video;
-      let rounds = 0;
+      let round = 0;
 
       const nextUser = () => {
 
@@ -113,7 +113,7 @@ class Preview extends Component {
         index = 0;
         duration = 0;
 
-        lists.sort(sortByChar(rounds));
+        lists.sort(sortByChar(round));
 
         while (index < lists.length) {
 
@@ -127,7 +127,7 @@ class Preview extends Component {
 
           }
 
-          playlist.push(assign({user}, video));
+          playlist.push(assign({user, round}, video));
           duration += video.duration;
           user.videos.shift();
 
@@ -139,7 +139,7 @@ class Preview extends Component {
 
         }
 
-        rounds++;
+        round++;
 
       } while (lastLength < playlist.length);
 
@@ -207,8 +207,12 @@ class Preview extends Component {
       <div>
         <h4>lista final</h4>
         <hr/>
-        {playlist.map(video =>
-          <Item key={video.id} startAt={when(video.duration)} isAdmin={isAdmin} {...video} />)}
+        {playlist.map(video => (
+          <Item key={video.id}
+                odd={video.round % 2}
+                startAt={when(video.duration)}
+                isAdmin={isAdmin} {...video} />
+        ))}
       </div>
     );
 

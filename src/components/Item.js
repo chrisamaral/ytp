@@ -6,7 +6,7 @@ class Item extends Component {
 
   render() {
 
-    const {id, title, duration, startAt, isAdmin} = this.props;
+    const {id, title, duration, startAt, odd, isAdmin} = this.props;
     const user = obj.get.bind(obj, this.props.user);
 
     return (
@@ -15,7 +15,7 @@ class Item extends Component {
           <div className='row'>
 
             <div className='col-sm-4'>
-              <Duration value={duration || 0}/>
+              <Duration value={duration || 0} color={odd ? 'success' : 'info'}/>
               <img className='img-responsive' src={`http://img.youtube.com/vi/${id}/mqdefault.jpg`}/>
             </div>
 
@@ -55,6 +55,7 @@ class Item extends Component {
 }
 
 Item.propTypes = {
+  odd: PropTypes.bool.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   startAt: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,

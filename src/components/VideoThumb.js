@@ -37,7 +37,7 @@ class VideoThumb extends Component {
       <div className='thumbnail text-left'
            style={{maxWidth: 480, margin: '1em auto'}}>
 
-        <Duration value={duration || 0}/>
+        <Duration value={duration || 0} color='primary'/>
 
         <a target='_blank' href={`https://youtube.com/watch?v=${videoId}`}>
 
