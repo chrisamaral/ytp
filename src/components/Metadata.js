@@ -13,6 +13,12 @@ class Metadata extends Component {
   componentDidMount() {
 
     const id = ytp.playlistId();
+
+    ytp.db.child(`playlist/${id}/admin`)
+      .once('value', snap => this
+        .setState({isAdmin: snap
+          .val() === ytp.user.uid}));
+
     this.db = {
       name: ytp.db.child(`playlist/${id}/name`),
       ini: ytp.db.child(`playlist/${id}/ini`)
@@ -61,6 +67,7 @@ class Metadata extends Component {
           <label>quando vai rolar</label>
           <input className='form-control'
                  type='datetime-local'
+                 disabled={!this.state.isAdmin}
                  value={this.state.ini}
                  onChange={this.onChange('ini')}/>
         </div>

@@ -26,6 +26,8 @@ class Queue extends Component {
 
     this.update = snap => {
 
+      if (!snap.exists()) return this.setState({videos: []});
+
       const myVideos = filter(snap.val());
 
       this.setState(
