@@ -175,8 +175,7 @@ class Preview extends Component {
       .once('value', snap => {
 
         const dateParts = snap.val()
-          .replace(/T/g, '-')
-          .replace(/:/g, '-')
+          .replace(/\D/g, '-')
           .split('-')
           .map(Number);
 
