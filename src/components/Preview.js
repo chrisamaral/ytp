@@ -205,6 +205,8 @@ class Preview extends Component {
 
     return (
       <div>
+        <h4>lista final</h4>
+        <hr/>
         {playlist.map(video =>
           <Item key={video.id} startAt={when(video.duration)} isAdmin={isAdmin} {...video} />)}
       </div>

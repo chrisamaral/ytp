@@ -56,7 +56,7 @@ class Metadata extends Component {
     document.title = `playlist :: ${this.state.name}`;
 
     return (
-      <form className='row'>
+      <form className='row hidden'>
 
         <div className='form-group col-sm-7'>
           <label>nome da parada</label>

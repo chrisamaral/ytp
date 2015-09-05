@@ -40,6 +40,9 @@ class Editor extends Component {
     return (
       <div>
 
+        <h4>sua lista</h4>
+        <hr/>
+
         <form className='row' onSubmit={this.enqueue.bind(this)}>
 
           <div className='form-group col-md-10 col-sm-8'>
@@ -74,6 +77,7 @@ class Editor extends Component {
 
           </div>
         )}
+
 
         <Queue />
       </div>
