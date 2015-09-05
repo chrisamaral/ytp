@@ -80,7 +80,7 @@ class Preview extends Component {
           assign({
             videos: [],
             sortToken: obj.get(me, 'facebook.cachedUserProfile.name', '')
-              .replace(/\W/g, '')
+              .replace(/\s/, '')
               .toLowerCase()
           }, me);
 
