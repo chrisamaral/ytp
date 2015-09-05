@@ -52,7 +52,8 @@ class Queue extends Component {
     const {videos} = this.state;
 
     return (
-      <div>
+      <div className='text-center'>
+
         {videos.map(
           ({videoId, userId}, index) => (
             <VideoThumb
@@ -63,6 +64,7 @@ class Queue extends Component {
               userId={userId}/>
           )
         )}
+
       </div>
     );
   }
