@@ -6,7 +6,7 @@ class Metadata extends Component {
   constructor() {
 
     super();
-    this.state = {};
+    this.state = {name: ''};
 
   }
 
@@ -52,6 +52,8 @@ class Metadata extends Component {
   }
 
   render() {
+
+    document.title = `playlist :: ${this.state.name}`;
 
     return (
       <form className='row'>

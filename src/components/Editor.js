@@ -31,7 +31,7 @@ class Editor extends Component {
 
   componentWillUnmount() {
 
-    ytp.off('video-too-long', this.showError);
+    ytp.removeListener('video-too-long', this.showError);
 
   }
 
@@ -55,7 +55,7 @@ class Editor extends Component {
           <div className='col-md-2 col-sm-4'>
 
             <button className='btn btn-primary btn-block' type='submit'>
-              enviar
+              adicionar
             </button>
 
           </div>
