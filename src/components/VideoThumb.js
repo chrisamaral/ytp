@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import obj from 'object-path';
+import pretty from 'pretty-ms';
 
 class VideoThumb extends Component {
 
@@ -29,28 +30,37 @@ class VideoThumb extends Component {
 
   render() {
 
-    const {videoId, userId, moveUp, moveDown} = this.props;
-    const {title} = this.state;
+    const {videoId, moveUp, moveDown} = this.props;
+    const {title, duration} = this.state;
 
     return (
-      <div className='thumbnail' style={{maxWidth: 640, margin: '1em auto'}}>
 
-        <img src={`http://img.youtube.com/vi/${videoId}/sddefault.jpg`}/>
+      <div className='thumbnail text-left'
+           style={{maxWidth: 480, margin: '1em auto'}}>
+
+        <h4 style={{position: 'absolute', margin: '.3em 0 0 .3em'}}>
+
+          <span className='label label-info'>
+            {pretty((duration || 0) * 1000)}
+          </span>
+
+        </h4>
+
+        <a target='_blank' href={`https://youtube.com/watch?v=${videoId}`}>
+
+          <img src={`http://img.youtube.com/vi/${videoId}/hqdefault.jpg`}/>
+
+        </a>
 
         <div className='caption'>
 
-          <h3>
-            <a target='_blank'
-               href={`https://youtube.com/watch?v=${videoId}`}>
+          <h5>
+            {` ${title || ''}`}
+          </h5>
 
-              {title || ''}
+          <p className='text-center'>
 
-            </a>
-          </h3>
-
-          <p>
-
-            <div className='btn-group'>
+            <span className='btn-group'>
 
               <a className={`btn btn-default ${moveUp ? '' : 'disabled'}`} onClick={moveUp}>
                 <i className='glyphicon glyphicon-chevron-up'/>
@@ -65,7 +75,7 @@ class VideoThumb extends Component {
                 <i className='glyphicon glyphicon-chevron-down'/>
               </a>
 
-            </div>
+            </span>
 
 
           </p>

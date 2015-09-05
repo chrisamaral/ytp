@@ -42,7 +42,7 @@ class Editor extends Component {
 
         <form className='row' onSubmit={this.enqueue.bind(this)}>
 
-          <div className='form-group col-sm-10'>
+          <div className='form-group col-md-10 col-sm-8'>
 
             <input name='videoUrl'
                    placeholder='http://yotube.com/watch?v=videoxyz'
@@ -52,7 +52,7 @@ class Editor extends Component {
 
           </div>
 
-          <div className='col-sm-2'>
+          <div className='col-md-2 col-sm-4'>
 
             <button className='btn btn-primary btn-block' type='submit'>
               enviar
