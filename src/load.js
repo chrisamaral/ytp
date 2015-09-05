@@ -13,18 +13,21 @@ function fb() {
 
   };
 
-  (function (d, s, id) {
+  function inserFBTag(doc, tag, id) {
 
-    var js, fjs = d.getElementsByTagName(s)[0];
+    let js;
+    const fjs = doc.getElementsByTagName(tag)[0];
 
-    if (d.getElementById(id)) return;
+    if (doc.getElementById(id)) return;
 
-    js = d.createElement(s);
+    js = doc.createElement(tag);
     js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
+    js.src = '//connect.facebook.net/en_US/sdk.js';
     fjs.parentNode.insertBefore(js, fjs);
 
-  }(document, 'script', 'facebook-jssdk'));
+  }
+
+  inserFBTag(document, 'script', 'facebook-jssdk');
 
 }
 

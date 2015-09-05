@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import forEach from 'for-each';
 import VideoThumb from './VideoThumb.js';
-import find from 'array-find';
 
 const filter = videos => {
 
@@ -67,17 +66,23 @@ class Queue extends Component {
 
       </div>
     );
+
   }
 
   indexOf(videoId) {
+
     const {videos} = this.state;
     let index = -1;
 
     for (let i = 0; i < videos.length; i++) {
+
       if (videos[i].videoId === videoId) {
+
         index = i;
         break;
+
       }
+
     }
 
     return index;

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Content from './Content.js';
-import Header from './Header.js';
 
 class App extends Component {
   constructor() {
@@ -17,13 +16,12 @@ class App extends Component {
     ytp.on('fb-ready', update);
     ytp.on('auth-change', update);
 
-
   }
 
   onClickLogin() {
 
     ytp.db
-      .authWithOAuthPopup("facebook",
+      .authWithOAuthPopup('facebook',
         error => error && this.setState({error}));
 
   }
@@ -33,6 +31,7 @@ class App extends Component {
     let content = <Content />;
 
     if (this.state.error) {
+
       content = (
         <div className='container'>
           <div className='jumbotron'>
@@ -46,6 +45,7 @@ class App extends Component {
           </div>
         </div>
       );
+
     }
 
     if (!ytp.fbReady) {
@@ -61,6 +61,7 @@ class App extends Component {
     }
 
     if (!ytp.user) {
+
       content = (
         <div className='container'>
           <div className='jumbotron'>
@@ -79,6 +80,7 @@ class App extends Component {
           </div>
         </div>
       );
+
     }
 
     const isActive = tab => this.state.tab === tab ? 'active' : '';
@@ -119,7 +121,9 @@ class App extends Component {
 
       </div>
     );
+
   }
+
 }
 
 export default App;

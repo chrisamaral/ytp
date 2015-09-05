@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import obj from 'object-path';
-import pretty from 'pretty-ms';
+import Duration from './Duration.js';
 
 class VideoThumb extends Component {
 
@@ -38,13 +37,7 @@ class VideoThumb extends Component {
       <div className='thumbnail text-left'
            style={{maxWidth: 480, margin: '1em auto'}}>
 
-        <h4 style={{position: 'absolute', margin: '.3em 0 0 .3em'}}>
-
-          <span className='label label-info'>
-            {pretty((duration || 0) * 1000)}
-          </span>
-
-        </h4>
+        <Duration value={duration || 0}/>
 
         <a target='_blank' href={`https://youtube.com/watch?v=${videoId}`}>
 
@@ -76,7 +69,6 @@ class VideoThumb extends Component {
               </a>
 
             </span>
-
 
           </p>
 

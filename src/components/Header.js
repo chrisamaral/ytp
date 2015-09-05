@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 class Header extends Component {
 
-  render () {
+  render() {
+
     return (
 
       <nav className='navbar navbar-default'>
@@ -18,6 +19,7 @@ class Header extends Component {
       </nav>
 
     );
+
   }
 
 }

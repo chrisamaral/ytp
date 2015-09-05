@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Editor from './Editor.js';
 import Metadata from './Metadata.js';
+import Preview from './Preview.js';
 
 class Playlist extends Component {
 
@@ -18,9 +19,10 @@ class Playlist extends Component {
           </div>
 
           <aside className='col-sm-5'>
-            lista final
-          </aside>
 
+            <Preview />
+
+          </aside>
 
         </div>
 

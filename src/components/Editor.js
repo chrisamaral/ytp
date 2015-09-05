@@ -103,7 +103,6 @@ class Editor extends Component {
     ytp.on('yt-state-change', enqueueAndStop);
     ytp.player.loadVideoById(videoId);
 
-
   }
 
 }
