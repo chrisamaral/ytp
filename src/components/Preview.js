@@ -171,10 +171,21 @@ class Preview extends Component {
 
     ytp.db
       .child(`playlist/${ytp.playlistId()}/ini`)
-      .once('value', snap =>
+      .once('value', snap => {
+
+        const dateParts = snap.val()
+          .replace(/T/g, '-')
+          .replace(/:/g, '-')
+          .split('-')
+          .map(Number);
+
+        dateParts[1]--;
+
         this.setState({
-          ini: new Date(snap.val())
-        }));
+          ini: new Date(...dateParts)
+        });
+
+      });
 
     ytp.db
       .child(`playlist/${ytp.playlistId()}/video`)

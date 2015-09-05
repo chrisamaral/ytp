@@ -27,9 +27,9 @@ class Item extends Component {
 
               <dl className='dl-horizontal'>
                 <dt>por</dt>
-                <dd>{user('facebook.cachedUserProfile.first_name', '')}</dd>
+                <dd>{user('facebook.cachedUserProfile.name', '')}</dd>
                 <dt>estimativa</dt>
-                <dd>{startAt.toLocaleTimeString()}</dd>
+                <dd>{startAt.toTimeString().substr(0, 5)}</dd>
               </dl>
 
               {isAdmin && (
