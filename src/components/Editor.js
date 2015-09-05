@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import qs from 'qs';
+import enqueueVideo from '../enqueue-video.js';
+import Queue from './Queue.js';
 
-function stopOnceLoaded(e) {
+function enqueueAndStop(e) {
 
   if (e.data !== YT.PlayerState.PLAYING) return;
 
+  enqueueVideo();
   ytp.player.pauseVideo();
-  ytp.removeListener('yt-state-change', stopOnceLoaded);
+  ytp.removeListener('yt-state-change', enqueueAndStop);
 
 }
 
@@ -18,12 +21,20 @@ class Editor extends Component {
       <div>
         <form onSubmit={this.enqueue.bind(this)}>
           <div className='form-group'>
+
             <label>
               url do novo vídeo
             </label>
-            <input name='videoUrl' type='url' required className='form-control'/>
+
+            <input name='videoUrl'
+                   placeholder='http://yotube.com/watch?v=videoxyz'
+                   required
+                   type='url'
+                   className='form-control'/>
+
           </div>
         </form>
+        <Queue />
       </div>
     );
 
@@ -48,9 +59,7 @@ class Editor extends Component {
 
     e.target.elements.videoUrl.value = '';
 
-
-
-    ytp.on('yt-state-change', stopOnceLoaded);
+    ytp.on('yt-state-change', enqueueAndStop);
     ytp.player.loadVideoById(videoId);
 
 

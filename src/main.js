@@ -30,23 +30,27 @@ ytp.db.onAuth(authData => {
 ytp.on('logged-in', user => ytp.db
   .child(`user/${user.uid}`).set(user));
 
+ytp.videoInfo = () => {
+
+  const info = ytp.player.getVideoData();
+
+  return {
+    id: info.video_id,
+    title: info.title,
+    duration: ytp.player.getDuration()
+  };
+
+};
+
 ytp.on('yt-state-change', ev => {
 
   if (ev.data !== YT.PlayerState.PLAYING) return;
 
-  const info = ytp.player.getVideoData();
+  const video = ytp.videoInfo();
 
-  if (!info) return;
-
-  const id = info.video_id;
-  const {title} = info;
-  const duration = ytp.player.getDuration();
-
-  ytp.db.child(`video/${id}`).set({
-    id,
-    title,
-    duration
-  });
+  ytp.db
+    .child(`video/${video.id}`)
+    .set(video);
 
 });
 

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "array-find": "^1.0.0",
     "babel-eslint": "^4.1.1",
     "babelify": "^6.3.0",
     "bpb": "^0.2.1",
