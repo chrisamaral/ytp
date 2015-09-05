@@ -15,16 +15,34 @@ function enqueueAndStop(e) {
 
 class Editor extends Component {
 
+  constructor() {
+
+    super();
+    this.state = {};
+
+  }
+
+  componentDidMount() {
+
+    this.showError = () => this.setState({error: true});
+    ytp.on('video-too-long', this.showError);
+
+  }
+
+  componentWillUnmount() {
+
+    ytp.off('video-too-long', this.showError);
+
+  }
+
   render() {
 
     return (
       <div>
-        <form onSubmit={this.enqueue.bind(this)}>
-          <div className='form-group'>
 
-            <label>
-              url do novo vídeo
-            </label>
+        <form className='row' onSubmit={this.enqueue.bind(this)}>
+
+          <div className='form-group col-sm-10'>
 
             <input name='videoUrl'
                    placeholder='http://yotube.com/watch?v=videoxyz'
@@ -33,7 +51,30 @@ class Editor extends Component {
                    className='form-control'/>
 
           </div>
+
+          <div className='col-sm-2'>
+
+            <button className='btn btn-primary btn-block' type='submit'>
+              enviar
+            </button>
+
+          </div>
+
         </form>
+
+        {this.state.error && (
+
+          <div className='alert alert-danger alert-dismissible'>
+
+            <a className='close' onClick={() => this.setState({error: false})}>
+              &times;
+            </a>
+
+            Seu vídeo não pode ter mais de 10 minutos
+
+          </div>
+        )}
+
         <Queue />
       </div>
     );
