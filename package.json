@@ -21,6 +21,7 @@
     "object-values": "^1.0.0",
     "object.omit": "^2.0.0",
     "object.pick": "^1.1.1",
+    "pretty-ms": "^2.1.0",
     "qs": "^5.0.0",
     "through2": "^2.0.0",
     "watchify": "^3.4.0"
@@ -30,7 +31,7 @@
   },
   "scripts": {
     "lint": "eslint src",
-    "build": "browserify -t './iffe.js' -t [ babelify --experimental --externalHelpers --loose es6.modules,es6.classes --optional minification.deadCodeElimination,utility.inlineEnvironmentVariables ] -t browserify-shim -t bpb -p [ minifyify --map main.js.map --output public/main.js.map --uglify [ --mangle ] ] --debug src/main.js --verbose -o public/main.js",
+    "build": "browserify -t [ babelify --experimental --externalHelpers --loose es6.modules,es6.classes --optional minification.deadCodeElimination,utility.inlineEnvironmentVariables ] -t browserify-shim -t bpb -p [ minifyify --map main.js.map --output public/main.js.map --uglify [ --mangle ] ] --debug src/main.js --verbose -o public/main.js",
     "watch": "watchify -t [ babelify --experimental --externalHelpers --loose es6.modules,es6.classes --optional minification.deadCodeElimination,utility.inlineEnvironmentVariables ] -t browserify-shim -t bpb --debug src/main.js --verbose -o public/main.js",
     "start": "cd public && python -m SimpleHTTPServer 8080",
     "deploy": "surge --project public"

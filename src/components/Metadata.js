@@ -53,25 +53,16 @@ class Metadata extends Component {
 
   render() {
 
-    document.title = `playlist :: ${this.state.name}`;
+    document.title = `playlist :: ${this.state.name || '~~sem nome~~'}`;
 
     return (
-      <form className='row hidden'>
+      <form className='row'>
 
-        <div className='form-group col-sm-7'>
-          <label>nome da parada</label>
+        <div className='form-group col-sm-12'>
+          <label>nome da playlist</label>
           <input className='form-control'
                  value={this.state.name}
                  onChange={this.onChange('name')}/>
-        </div>
-
-        <div className='form-group col-sm-5'>
-          <label>quando vai rolar</label>
-          <input className='form-control'
-                 type='datetime-local'
-                 disabled={!this.state.isAdmin}
-                 value={this.state.ini}
-                 onChange={this.onChange('ini')}/>
         </div>
 
       </form>
